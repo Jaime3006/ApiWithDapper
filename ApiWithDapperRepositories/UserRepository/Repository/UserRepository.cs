@@ -14,7 +14,30 @@ namespace ApiWithDapperRepositories.UserRepository.Repository
         {
             _context = context;
         }
+        public async Task<bool> CheckUsername(string username)
+        {
+            var connection =_context.CreateConnection();
 
+            var query = $@"SELECT CAST(COUNT(1) AS BIT) AS Expr1
+                           from dbo.Users
+                           where Username=@Username";
+
+            var res = await connection.QueryFirstAsync<bool>(query, new { Username = username });
+                     
+            return res;
+        }
+        public async Task<bool>CheckEmail(string email) 
+        {
+
+            var connection = _context.CreateConnection();
+
+            var  query = $@"SELECT CAST(COUNT(1) AS BIT) AS Expr1
+                           from dbo.Users
+                           where Email=@Email";
+            var res = await connection.QueryFirstAsync<bool>(query, new { Email = email });
+            
+            return res;
+        }
         public async Task<int> CreateUser(User user)
         {
           var connection= _context.CreateConnection();

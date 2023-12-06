@@ -1,6 +1,7 @@
 ﻿using ApiWithDapperModels.User;
 using ApiWithDapperRepositories.UserRepository.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,13 +23,40 @@ namespace ApiWithDapper.Controllers.Users
         {
             try 
             {
-                await _userRepository.CreateUser(user);
-                return Ok();
+
+                IDictionary<int,string> res = await CheckData(user);
+
+                if (res.IsNullOrEmpty())
+                {
+                    await _userRepository.CreateUser(user);
+                    return Ok();
+                }
+                else
+                {
+                    return Conflict(res) ;
+                }
+               
+              
             }
             catch (Exception ex) 
             {
                 return StatusCode(500,ex.Message); 
             } 
+        }
+        [NonAction]
+        public async Task<IDictionary<int,string>> CheckData(User user) 
+        {
+            var checks = new Dictionary<int, string>() { }; 
+            if (await _userRepository.CheckUsername(user.Username))
+            {
+                checks.Add(1, "This usernanme already exists");
+            }
+            if (await _userRepository.CheckEmail(user.Email))
+            {
+                checks.Add(2, "This email already exists");
+            }
+
+                return checks;
         }
     }
        
