@@ -9,3 +9,7 @@
 /ApiWithDapperModels/obj
 /ApiWithDapperRepositories/bin/Debug/net8.0
 /ApiWithDapperRepositories/obj
+/ApiWithDapperTestUnit/bin/Debug/net8.0
+/ApiWithDapperTestUnit/obj
+/ApiWithDapperUnitTest/bin/Debug/net8.0
+/ApiWithDapperUnitTest/obj
