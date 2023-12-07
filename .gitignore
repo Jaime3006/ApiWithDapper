@@ -1,0 +1,15 @@
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/ApiWithDapper/bin/Debug/net8.0
+/ApiWithDapper/obj
+/ApiWithDapperModels/bin/Debug/net8.0
+/ApiWithDapperModels/obj
+/ApiWithDapperRepositories/bin/Debug/net8.0
+/ApiWithDapperRepositories/obj
+/ApiWithDapperTestUnit/bin/Debug/net8.0
+/ApiWithDapperTestUnit/obj
+/ApiWithDapperUnitTest/bin/Debug/net8.0
+/ApiWithDapperUnitTest/obj
