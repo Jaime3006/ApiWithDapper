@@ -1,5 +1,6 @@
 ﻿using ApiWithDapperModels.User;
 using ApiWithDapperRepositories.UserRepository.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
@@ -30,11 +31,9 @@ namespace ApiWithDapper.Controllers.Users
                 {
                     await _userRepository.CreateUser(user);
                     return Ok();
-                }
-                else
-                {
-                    return Conflict(res) ;
-                }
+                }             
+             
+                    return Conflict(res) ;              
                
               
             }
@@ -42,6 +41,21 @@ namespace ApiWithDapper.Controllers.Users
             {
                 return StatusCode(500,ex.Message); 
             } 
+        }
+        [HttpGet, Authorize]
+        public async Task<IActionResult> GetAllUsers() 
+        {
+            try
+            { 
+              var res=  await _userRepository.GetAllUsers();
+                return Ok(res);
+            }
+            catch (Exception ex) 
+            {
+                return StatusCode(500, ex.Message);
+
+            }
+        
         }
         [NonAction]
         public async Task<IDictionary<int,string>> CheckData(User user) 

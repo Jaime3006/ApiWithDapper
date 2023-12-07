@@ -1,4 +1,6 @@
-﻿using ApiWithDapperRepositories.UserRepository.Contracts;
+﻿using ApiWithDapperRepositories.AuthRepository.Contrats;
+using ApiWithDapperRepositories.AuthRepository.Repository;
+using ApiWithDapperRepositories.UserRepository.Contracts;
 using ApiWithDapperRepositories.UserRepository.Repository;
 
 namespace ApiWithDapper.Configuration
@@ -9,7 +11,8 @@ namespace ApiWithDapper.Configuration
            this IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
-           
+            services.AddScoped<IAuthRepository, AuthRepository>();
+
 
             return services;
         }

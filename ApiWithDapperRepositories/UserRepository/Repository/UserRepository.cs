@@ -74,5 +74,14 @@ namespace ApiWithDapperRepositories.UserRepository.Repository
             return res;
                
         }
+        //Get
+        public async Task<List<User>> GetAllUsers() 
+        { 
+        var connection =_context.CreateConnection();
+            var query = $@"Select * from dbo.Users";
+            var res = await connection.QueryAsync<User>(query);
+            return res.ToList();
+        
+        }
     }
 }
